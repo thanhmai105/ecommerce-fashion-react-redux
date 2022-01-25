@@ -1,52 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-function RenderProduct({ product, checkTitleLength }) {
-    return (
-        <div className="product-item">
-            <img src={product.image} alt={product.title} />
-            <div className="product-content">
-                <a href='/'>{checkTitleLength(product.title)}</a><br />
-                <span>${product.price}</span>
-            </div>
-            <div className="btn-addCart">
-                Add to Cart
-            </div>
-        </div>
-    )
-}
-
-function Products() {
-
-    const [products, setProducts] = useState([])
-    
-
-    useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(response => response.json())
-            .then(products => setProducts(products));
-    }, [])
+function Products({ product }) {
 
     const checkTitleLength = (title) => {
         if (title.length > 35) {
             return title.slice(0, 35) + '...'
-        } else if (title.length <= 35) {
+        } else {
             return title
         }
     }
 
-    const productRate = Products.filter((product) => product.rating.rate > 4.0)
-    
+    // const addCart = () => {
+
+    // }
 
     return (
-        <div className="container">
-            <div className="row">
-                {products.map((product) => (
-                    <div key={product.id} className="col-lg-3 col-md-4 col-6 p-3">
-                        <RenderProduct product={product} checkTitleLength={checkTitleLength}/>
-                    </div>
-                ))}
+        <div className="product-item" >
+            <Link to={`/menu/${product.id}`}>
+                <img src={product.image} alt={product.title} />
+            </Link>
+            <div className="product-content">
+                <Link to={`/menu/${product.id}`}>{checkTitleLength(product.title)}</Link><br />
+                <span>${product.price}</span>
             </div>
+            <div className="btn-addCart" >Add to Cart </div>
         </div>
     )
 }
+
 export default Products

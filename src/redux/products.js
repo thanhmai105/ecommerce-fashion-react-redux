@@ -1,10 +1,13 @@
 import * as ActionTypes from './ActionTypes';
 
-export const Products = (state = { 
-    isLoading: true,
-    errMess: null,
-    products:[]}, 
-    action) => {
+export const Products = (
+        state = { 
+            isLoading: true,
+            errMess: null,
+            products:[]
+        }, 
+        action
+    ) => {
     switch (action.type) {
         case ActionTypes.ADD_PRODUCTS:
             return {...state, isLoading: false, errMess: null, products: action.payload};
@@ -19,3 +22,10 @@ export const Products = (state = {
             return state;
     }
 };
+
+// Reducer
+// khởi tạo state
+
+//payload : dữ liệu mang theo đi
+
+

@@ -24,6 +24,8 @@ export const fetchProducts = () => (dispatch) => {
         .catch(error => dispatch(productsFailed(error.message)));
 };
 
+//function to define action for dispatch
+
 export const productsLoading = () => ({
     type: ActionTypes.PRODUCTS_LOADING,
 });
@@ -36,3 +38,17 @@ export const addProducts = (products) => ({
     type: ActionTypes.ADD_PRODUCTS,
     payload: products
 });
+
+//add cart
+
+export const getNumberCart = () => ({
+    type: ActionTypes.GET_NUMBER_CART
+})
+
+export const addCart = (payload) => ({
+    type: ActionTypes.ADD_CARTS,
+    payload
+})
+
+
+//dispatch ,api ,

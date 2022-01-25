@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react'
 import cart from '../image/shopping-cart.png'
 import { Link } from 'react-router-dom'
 
-function Header() {
+function Header(props) {
 
-    const [products, setProducts] = useState([])
-
-    useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(response => response.json())
-            .then(products => setProducts(products));
-    }, [])
-
-    const categories = products.map((product) => {
+    const categories = props.products.products.map((product) => {
         return product.category
     })
     const categoriesRemain = [...new Set(categories)]
 
+    const [search, setSearch] = useState('')
+    console.log(search);
+    // const handleSearch = (e) => {
+    //   setSearch(e.target.value)
+    // }
 
     return (
         <div className='Header border-bottom'>
@@ -26,10 +23,10 @@ function Header() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <Link className="navbar-brand" to="/home">ekommart</Link>
-                    <a className="nav-link cart-mobile" href="/">
+                    <Link className="nav-link cart-mobile" to="/cart">
                         <img id="shopping-cart" src={cart} alt="shopping-cart" />
                         <span id="cart-number">0</span>
-                    </a>
+                    </Link>
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav m-auto nav-menu">
@@ -48,7 +45,9 @@ function Header() {
 
                                 <div className="dropdown-menu drop-menu" aria-labelledby="dropdownMenuLink">
                                     {categoriesRemain.map((category) => (
-                                        <a key={category} className="dropdown-item desktop" href="/">{category.charAt(0).toUpperCase() + category.slice(1)}</a>
+                                        <Link key={category} className="dropdown-item desktop" 
+                                            to={`/${category}`}>{category.charAt(0).toUpperCase() + category.slice(1)}
+                                        </Link>
                                     ))}
                                 </div>
                             </li>
@@ -61,8 +60,14 @@ function Header() {
                         </ul>
 
                         <form className="form-inline desktop">
-                            <input className="form-control mr-sm-2 border-0 search" type="search" placeholder='Search...' aria-label="Search" />
-                            <button className="btn p-2 border-0" type="submit">
+                            <input 
+                                value={search}
+                                onChange={e => setSearch(e.target.value)}
+                                className="form-control mr-sm-2 border-0 search" 
+                                type="search" placeholder='Search...' aria-label="Search" 
+                            />
+                            <button 
+                                className="btn p-2 border-0" type="submit">
                                 <i className="fas fa-search"></i>
                             </button>
                         </form>

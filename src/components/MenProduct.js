@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 import Loading from './Loading'
 import Products from './Products';
 
-function Menu(props) {
+function MenProduct(props) {
 
-    console.log(props.products.products);
-    const menu = props.products.products.map((product) =>
+    const filter = (category) => {
+        const men = props.products.products.filter((product) => product.category === category)
+        return men
+    }
+
+    // const men = props.products.products.filter((product) => product.category === "men's clothing")
+
+    const menProduct = filter("men's clothing").map((product) =>
         <div key={product.id} className="col-lg-3 col-md-4 col-6 p-3">
             <Products product={product} />
         </div>
@@ -20,10 +25,10 @@ function Menu(props) {
         return (
             <div className="container page-content">
                 <div className="row">
-                    {menu}
+                    {menProduct}
                 </div>
             </div>
         )
     }
 }
-export default Menu
+export default MenProduct

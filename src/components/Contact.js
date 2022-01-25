@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Contact() {
 
-  
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [mess, setMess] = useState('')
+
+  const [errName, setErrName] = useState('')
+  const [errEmail, setErrEmail] = useState('')
+  const [errMess, setErrMess] = useState('')
+
+  const handleSubmitContact = (e) => {
+    e.preventDefault()
+
+    if (name !== '' && email !== '' && mess !== '') {
+      alert('Submit success')
+      setName('')
+      setEmail('')
+      setMess('')
+    } 
+    
+    if (name === '') setErrName('Name is required !')
+    
+    if (email === '') setErrEmail('Email is required !')
+    
+    if (mess === '') setErrMess('Message is required !')
+
+  }
+
   return (
     <div className='page-content container-fluid contact'>
       <h2>Contact Us</h2>
@@ -45,20 +70,60 @@ function Contact() {
           <form>
             <div className="form-group">
               <label htmlFor="">Name</label>
-              <input type="text" name="name" id="name" className="form-control" placeholder="Name" aria-describedby="helpId" />
-              <small id="helpId" className="text-muted"></small>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                className="form-control"
+                placeholder="Name"
+                aria-describedby="helpId" 
+                value={name}
+                onChange={e => {
+                  setName(e.target.value)
+                  if (name !== '')
+                  setErrName('')
+                }}
+              />
+              <small>{errName}</small>
             </div>
             <div className="form-group">
               <label htmlFor="">Email</label>
-              <input type="text" name="email" id="email" className="form-control" placeholder="Email" aria-describedby="helpId" />
-              <small id="helpId" className="text-muted"></small>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                className="form-control"
+                placeholder="Email"
+                aria-describedby="helpId"
+                value={email}
+                onChange={e => {
+                  setEmail(e.target.value)
+                  if (email !== '')
+                    setErrEmail('')
+                }}
+              />
+              <small>{errEmail}</small>
             </div>
             <div className="form-group">
               <label htmlFor="message">Message</label>
-              <textarea className="form-control" name="message" id="message" placeholder='Message' rows="3"></textarea>
+              <textarea
+                className="form-control"
+                name="message"
+                id="message"
+                placeholder='Message'
+                rows="3"
+                value={mess}
+                onChange={e => {
+                  setMess(e.target.value)
+                  if (mess !== '')
+                    setErrMess('')
+                }}
+              >
+              </textarea>
+              <small>{errMess}</small>
             </div>
 
-            <button>Submit</button>
+            <button onClick={handleSubmitContact}>Submit</button>
           </form>
         </div>
       </div>
