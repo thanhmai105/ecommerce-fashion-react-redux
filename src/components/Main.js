@@ -34,30 +34,7 @@ class Main extends Component {
 
     constructor(props) {
         super();
-        //state search
     }
-
-    
-
-    // handleSearch = (search) => {
-    //     console.log(search);
-    //     // let sourceArray = this.props.products;
-    //     // let newArray = [];
-    //     // if (search.length <= 0) {
-    //     //     newArray = sourceArray;
-    //     // } else {
-    //     //     search.toLowerCase();
-    //     //     for (let item of sourceArray) {
-    //     //         if (item.name.toLowerCase().indexOf(search) > -1) {
-    //     //             newArray.push(item);
-    //     //         }
-    //     //     }
-    //     // }
-    //     // this.setState({
-    //     //     items: newArray,
-    //     //     valueSearch: search
-    //     // });
-    // }
 
     componentDidMount() {
         this.props.fetchProducts();
