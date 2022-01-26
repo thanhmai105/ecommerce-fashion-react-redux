@@ -10,7 +10,7 @@ function Header(props) {
     const categoriesRemain = [...new Set(categories)]
 
     const [search, setSearch] = useState('')
-    console.log(search);
+    // console.log(search);
     // const handleSearch = (e) => {
     //   setSearch(e.target.value)
     // }

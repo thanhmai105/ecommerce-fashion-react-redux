@@ -255,7 +255,7 @@ input.search:focus-visible
 
 /* ==============main=========== */
 .page-content {
-  margin-top:8rem;
+  margin-top:9rem;
 }
 
 .product-item {
@@ -318,6 +318,10 @@ input.search:focus-visible
   color: red;
 }
 
+div.filter div select {
+  margin-left: 0.5rem;
+}
+
 @media screen and (max-width: 992px) {
   .product-item .btn-addCart {
     opacity: 1;
@@ -331,6 +335,16 @@ input.search:focus-visible
   
   div.col-6 {
     max-width: unset;
+  }
+
+  div.filter {
+    display: inline-block!important;
+  }
+  div.filter div {
+    display: flex;
+    justify-content: space-between;
+    width: 55vw;
+    padding: 0.3rem 0;
   }
 }
 
