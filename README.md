@@ -1,8 +1,8 @@
 Hiển thị được giao diện bao gồm các trang
 - Home
 - Login, Register
-- Menu (bao gồm danh sách các sản phẩm), Men's clothing (một loại sản phẩm)
-- ProductDetail
+- Menu (bao gồm danh sách các sản phẩm, lọc sản phẩm theo category, rating, price), Men's clothing (một loại sản phẩm)
+- ProductDetail (gồm chi tiết sản phẩm và sản phẩm liên quan)
 - About Us
 - Contact Us
 
