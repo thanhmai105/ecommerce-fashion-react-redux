@@ -3,6 +3,8 @@ import Loading from './Loading'
 import Products from './Products';
 
 function Menu(props) {
+
+    // console.log(typeof(props.addCart));
     const [category, setCategory] = useState("all category")
     const [rate, setRate] = useState("select rating")
     const [price, setPrice] = useState("all")
@@ -90,7 +92,7 @@ function Menu(props) {
                 <div className="row">
                     {products.map((product) =>
                         <div key={product.id} className="col-lg-3 col-md-4 col-6 p-3">
-                            <Products product={product} />
+                            <Products product={product} addCart={props.addCart} />
                         </div>
                     )}
                 </div>

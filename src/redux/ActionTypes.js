@@ -7,4 +7,4 @@ export const GET_NUMBER_CART = 'GET_NUMBER_CART'
 export const ADD_CARTS = 'ADD_CARTS'
 export const DELETE_CART = 'DELETE_CART'
 
-//action
+//action types

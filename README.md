@@ -5,6 +5,7 @@ Hiển thị được giao diện bao gồm các trang
 - ProductDetail (gồm chi tiết sản phẩm và sản phẩm liên quan)
 - About Us
 - Contact Us
+- Thêm sản phẩm vào giỏ hàng, chưa có update giỏ hảng
 
 Thư viện sử dụng: 
 - BootStrap

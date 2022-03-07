@@ -41,7 +41,6 @@ export const addProducts = (products) => ({
 
 //add cart
 
-
 export const getNumberCart = () => ({
     type: ActionTypes.GET_NUMBER_CART
 })
@@ -51,5 +50,9 @@ export const addCart = (payload) => ({
     payload
 })
 
+export const deleteCart = (payload) => ({
+    type: ActionTypes.DELETE_CART,
+    payload
+})
 
 //dispatch ,api ,

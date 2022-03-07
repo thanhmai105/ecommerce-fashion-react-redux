@@ -563,11 +563,12 @@ table thead tr th {
 
 td .cart-item{
   display: flex;
-  height: 10rem;
+  height: 7rem;
   align-items: center;
+  padding-top: 2rem;
 }
 td .cart-item img{
-  width: 10rem;
+  /* width: 10rem; */
   height: 100%;
   object-fit: cover;
   cursor: pointer;
@@ -580,12 +581,12 @@ td .cart-item .info-cart-item{
 }
 .info-cart-item p{
   color: var(--primary);
-  font-size: 1.4rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
 td input {
-  width: 5rem;
+  width: 3rem;
   margin-left: 1rem;
 }
 
@@ -597,17 +598,17 @@ tr th:nth-child(3) {
 
 .total {
   margin-top: 2rem;
-  /* height: 16rem; */
+  display: flex;
+  justify-content: right;
 }
 .total table{
   border-top: 3px solid var(--primary);
-  width: 40%;
-  float: right;
+  width: 25vw;
 }
 .total table tbody{}
 .total table tbody tr{}
 .total table tbody tr td{
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 .total table tbody tr td:nth-child(1) {
@@ -625,4 +626,11 @@ tr th:nth-child(3) {
   background-color: rgb(37, 37, 37);
   padding: 0.5rem 2rem;
   color: var(--white);
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .total table {
+    width: 50vw;
+  }
 }

@@ -21,13 +21,14 @@ import Cart from './Cart'
 const mapStateToProps = state => {
     return {
         products: state.products,
+        numberCart: state.carts.numberCart,
+        carts: state.carts
     }
 }
 
-
-
 const mapDispatchToProps = dispatch => ({
-    fetchProducts: () => { dispatch(fetchProducts()) }
+    fetchProducts: () => { dispatch(fetchProducts()) },
+    addCart:product=>dispatch(addCart(product))
 });
 
 class Main extends Component {
@@ -55,20 +56,21 @@ class Main extends Component {
         }
 
 
-        const CartWithId = ({ match }) => {
-            return (
-                <Cart
-                    product={this.props.products.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
-                    isLoading={this.props.products.isLoading}
-                    errMess={this.props.products.errMess}
-                />
-            );
-        }
+        // const CartWithId = ({ match }) => {
+        //     return (
+        //         <Cart
+        //             product={this.props.products.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
+        //             isLoading={this.props.products.isLoading}
+        //             errMess={this.props.products.errMess}
+        //         />
+        //     );
+        // }
 
         return (
             <div>
                 <Header
                     products={this.props.products}
+                    numberCart={this.props.numberCart}
                     // valueSearch={this.state.valueSearch}
                     // handleSearch={this.handleSearch}
                 />
@@ -77,8 +79,8 @@ class Main extends Component {
                     <Route exact path='/login' component={(props) => <Login {...props} />} />
                     <Route exact path='/contact' component={(props) => <Contact {...props} />} />
                     <Route exact path='/about' component={(props) => <AboutUs {...props} />} />
-                    <Route exact path='/menu' component={() => <Menu products={this.props.products} />} />
-                    <Route exact path='/cart' component={CartWithId} />
+                    <Route exact path='/menu' component={() => <Menu products={this.props.products} addCart={this.props.addCart}/>} />
+                    <Route exact path='/cart' component={() => <Cart carts={this.props.carts} />} />
 
                     <Route exact path="/men's clothing" component={() => <MenProduct products={this.props.products} />} />
 

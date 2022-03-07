@@ -25,7 +25,7 @@ function Header(props) {
                     <Link className="navbar-brand" to="/home">ekommart</Link>
                     <Link className="nav-link cart-mobile" to="/cart">
                         <img id="shopping-cart" src={cart} alt="shopping-cart" />
-                        <span id="cart-number">0</span>
+                        <span id="cart-number">{props.numberCart}</span>
                     </Link>
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -87,7 +87,7 @@ function Header(props) {
                                 <li className="nav-item cart-desktop">
                                     <Link className="nav-link" to="/cart">
                                         <img id="shopping-cart" src={cart} alt="shopping-cart" />
-                                        <span id="cart-number">0</span>
+                                        <span id="cart-number">{props.numberCart}</span>
                                     </Link>
                                 </li>
                             </ul>

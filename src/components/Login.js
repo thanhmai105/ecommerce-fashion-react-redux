@@ -17,7 +17,7 @@ function Login() {
         <div className='login page-content container-fluid contact'>
             <h2>Login</h2>
 
-            <div className='row text-left '>
+            <div className='row text-left'>
                 {/* ===============login========= */}
                 <div className='col-md-6 border-right'>
                     <h3>Sign in</h3>

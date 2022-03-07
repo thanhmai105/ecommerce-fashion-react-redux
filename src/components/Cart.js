@@ -1,33 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { deleteCart } from '../redux/ActionCreator';
 
 function RenderItemCart({ product }) {
-    <tr>
-        <td>
-            <div class="cart-item">
-                <img src={product.image} alt="" />
-                <div className="info-cart-item">
-                    <span>${product.title}</span><br />
-                    <span class="price">${product.price.toFixed(2)}</span><br />
-                    <p>remove</p>
+
+    const [quantity, setQuantity] = useState(product.quantity)
+
+    return (
+        <tr className='border-bottom'>
+            <td>
+                <div className="cart-item">
+                    <img src={product.image} alt="" />
+                    <div className="info-cart-item">
+                        <span>{product.title}</span><br />
+                        <span className="price">${product.price.toFixed(2)}</span><br />
+                        <p onClick={() => {
+                            // console.log(product);
+                            console.log(deleteCart(product));
+                            deleteCart(product.id)
+                        }}>remove</p>
+                    </div>
                 </div>
-            </div>
-        </td>
-        <td>
-            <input
-                type="number"
-                class="quanity"
-                id={product.id}
-                pattern="[0-9]{2}" min="1" max="10"
-            />
-        </td>
-        <td>
-            <span>${(product.price * product.inCart).toFixed(2)}</span>
-        </td>
-    </tr>
+            </td>
+            <td>
+                <input
+                    type="number"
+                    className="quanity"
+                    id={product.id}
+                    min="1" max="10"
+                    value={quantity}
+                    onChange={e => setQuantity(e.target.value)}
+                />
+            </td>
+            <td>
+                <span>${(product.price * quantity).toFixed(2)}</span>
+            </td>
+        </tr>
+    )
+
 }
 
 function Cart(props) {
-    console.log(props.products.products);
+
+    let ListCart = props.carts.cartData;
+
+    let TotalCart = 0
+
+    const totalCost = () => {
+        for (let index in ListCart) {
+            TotalCart += ListCart[index].quantity * ListCart[index].price
+        }
+
+        return TotalCart
+    }
 
     return (
         <div className='page-content container cart mb-5'>
@@ -40,20 +64,36 @@ function Cart(props) {
                     </tr>
                 </thead>
                 <tbody id="listItemCart">
-                    <RenderItemCart product={props.product} />
+                    {ListCart.map((product) =>
+                        <RenderItemCart key={product.id} product={product} />
+                    )}
                 </tbody>
             </table>
 
             <div className="total">
                 <table>
                     <tbody id="totalPayment">
-
+                        <tr>
+                            <td>Subtotal :</td>
+                            <td>${totalCost().toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td>Fee Ship: </td>
+                            <td>$20.00</td>
+                        </tr>
+                        <tr>
+                            <td>Total: </td>
+                            <td>${(totalCost() + 20.00).toFixed(2)}</td>
+                        </tr>
                     </tbody>
+                    
                 </table>
+                
             </div>
-            <button id="btn-cart" type="submit">Proceed to Checkout</button>
+            <button id="btn-cart">Payment</button>
         </div>
     )
 }
 
 export default Cart
+

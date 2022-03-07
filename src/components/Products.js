@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import StarRatings from 'react-star-ratings';
 
-function Products({ product }) {
+function Products({ product, addCart }) {
+
+    // console.log(addCart);
 
     const checkTitleLength = (title) => {
         if (title.length > 20) {
@@ -10,10 +12,6 @@ function Products({ product }) {
         } else {
             return title
         }
-    }
-
-    const addCart = () => {
-        console.log(product);
     }
 
     return (
@@ -32,7 +30,7 @@ function Products({ product }) {
                     starRatedColor="#fbea54"
                 />
             </div>
-            <div className="btn-addCart" onClick={addCart}>Add to Cart </div>
+            <div className="btn-addCart" onClick={() => addCart(product)}>Add to Cart </div>
         </div>
     )
 }
