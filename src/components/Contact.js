@@ -18,12 +18,12 @@ function Contact() {
       setName('')
       setEmail('')
       setMess('')
-    } 
-    
+    }
+
     if (name === '') setErrName('Name is required !')
-    
+
     if (email === '') setErrEmail('Email is required !')
-    
+
     if (mess === '') setErrMess('Message is required !')
 
   }
@@ -76,12 +76,12 @@ function Contact() {
                 id="name"
                 className="form-control"
                 placeholder="Name"
-                aria-describedby="helpId" 
+                aria-describedby="helpId"
                 value={name}
                 onChange={e => {
                   setName(e.target.value)
                   if (name !== '')
-                  setErrName('')
+                    setErrName('')
                 }}
               />
               <small>{errName}</small>

@@ -1,0 +1,26 @@
+div.form-control:hover {
+    border-color: var(--primary-text);
+}
+
+div.form-control:focus {
+    border-color: var(--primary-text);
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.212);
+}
+
+.form-control input {
+    border: none;
+    width: 100%;
+}
+.form-control input:focus-visible {
+    outline: none;
+}
+
+.control-label:after {
+    content:"*";
+    color: var(--primary-color);
+    padding: 5px;
+}
+
+#helpId.text-muted {
+    color: var(--primary-color)!important;
+}   

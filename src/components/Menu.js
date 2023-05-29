@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import Loading from './Loading'
 import Products from './Products';
+import { useSelector } from 'react-redux'
 
-function Menu(props) {
+function Menu({ addCart }) {
+    const { isLoading, errMess, products: listProduct } = useSelector(state => state.products)
 
-    // console.log(typeof(props.addCart));
     const [category, setCategory] = useState("all category")
     const [rate, setRate] = useState("select rating")
     const [price, setPrice] = useState("all")
 
-    const [products, setProducts] = useState(props.products.products)
+    const [products, setProducts] = useState(listProduct)
 
     const handleFilterChange = (e, filterType) => {
         switch (filterType) {
@@ -27,7 +28,7 @@ function Menu(props) {
     }
 
     useEffect(() => {
-        let filteredProducts = props.products.products
+        let filteredProducts = listProduct
         if (category !== 'all category') {
             filteredProducts = filteredProducts.filter(product => product.category === category)
         }
@@ -46,58 +47,55 @@ function Menu(props) {
         }
 
         setProducts(filteredProducts)
-    }, [category, rate, price, props.products.products])
+    }, [category, rate, price, listProduct])
 
-
-    //render
-    if (props.products.isLoading) {
+    if (isLoading) {
         return (<div className="container page-content"><Loading /> </div>)
-    } else if (props.products.errMess) {
-        return (<div className="container page-content">error</div>)
-    } else {
-        return (
-            <div className="container page-content">
-                <div className='d-flex justify-content-between filter'>
-                    <div>
-                        <label>Category: </label>
-                        <select onChange={(e) => handleFilterChange(e, "category")}>
-                            <option value="all category">All category</option>
-                            <option value="men's clothing">Men's clothing</option>
-                            <option value="women's clothing">Women's clothing</option>
-                        </select>
-                    </div>
-
-
-                    <div>
-                        <label>Rating: </label>
-                        <select onChange={(e) => handleFilterChange(e, "rate")}>
-                            <option value={"select rating"}>Select rating</option>
-                            <option value="1">From 1.0</option>
-                            <option value="2">From 2.0</option>
-                            <option value="3">From 3.0</option>
-                            <option value="4">From 4.0</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label>Sort Price: </label>
-                        <select onChange={(e) => handleFilterChange(e, "price")}>
-                            <option value="all">All</option>
-                            <option value="lowest">Low to hight</option>
-                            <option value="highest">Hight to low</option>
-                        </select>
-                    </div>
+    }
+    if (errMess) {
+        return (<div className="container page-content">{errMess}</div>)
+    }
+    return (
+        <div className="container page-content">
+            <div className='d-flex justify-content-between filter'>
+                <div>
+                    <label>Category: </label>
+                    <select onChange={(e) => handleFilterChange(e, "category")}>
+                        <option value="all category">All category</option>
+                        <option value="men's clothing">Men's clothing</option>
+                        <option value="women's clothing">Women's clothing</option>
+                    </select>
                 </div>
 
-                <div className="row">
-                    {products.map((product) =>
-                        <div key={product.id} className="col-lg-3 col-md-4 col-6 p-3">
-                            <Products product={product} addCart={props.addCart} />
-                        </div>
-                    )}
+                <div>
+                    <label>Rating: </label>
+                    <select onChange={(e) => handleFilterChange(e, "rate")}>
+                        <option value={"select rating"}>Select rating</option>
+                        <option value="1">From 1.0</option>
+                        <option value="2">From 2.0</option>
+                        <option value="3">From 3.0</option>
+                        <option value="4">From 4.0</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Sort Price: </label>
+                    <select onChange={(e) => handleFilterChange(e, "price")}>
+                        <option value="all">All</option>
+                        <option value="lowest">Low to hight</option>
+                        <option value="highest">Hight to low</option>
+                    </select>
                 </div>
             </div>
-        )
-    }
+
+            <div className="row">
+                {products.map((product) =>
+                    <div key={product.id} className="col-lg-3 col-md-4 col-6 p-3">
+                        <Products product={product} addCart={addCart} />
+                    </div>
+                )}
+            </div>
+        </div>
+    )
 }
 export default Menu

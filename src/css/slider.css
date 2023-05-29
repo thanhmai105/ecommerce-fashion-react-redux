@@ -1,0 +1,129 @@
+.slider {
+
+}
+
+.carousel-inner{}
+.carousel-inner .carousel-item{}
+
+.carousel-content-slider1 {
+    position: absolute;
+    z-index: 3;
+    color: #fff;
+    left: 30%;
+    text-align: left;
+    top: 50%;
+    bottom: 0;
+    transform: translate(-35%, -50%);
+    width: 50%;
+}
+
+.content-line1{
+    font-size: 9vw;
+    text-transform: uppercase;
+    font-weight: 900;
+    position: absolute;
+    z-index: 4;
+    animation-name: content-line1;
+    animation-duration: 1s;
+    top: 20%;
+}
+@keyframes content-line1 {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+.content-line2{
+    font-size: 5vw;
+    animation-name: content-line2;
+    animation-duration: 1s; 
+    position: absolute;
+    z-index: 4;
+    bottom: 0;
+    font-family: 'Pacifico', cursive;
+}
+
+@keyframes content-line2 {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.content-back{
+    font-size: 20vw;
+    position: absolute;
+    top: -20px;
+    bottom: 0;
+    z-index: 0;
+    animation-name: back-animation;
+    animation-duration: 1s; 
+    color: rgb(255 255 255 / 19%);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+@keyframes back-animation {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.carousel-bag-animation {
+    position: absolute; 
+    right: 0;
+    z-Index: 2; 
+    bottom: 0; 
+    width: 40%;
+    animation-name: bag-animation;
+    animation-duration: 1s;
+}
+
+@keyframes bag-animation {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* icon */
+.carousel-control-prev, .carousel-control-next {
+    z-index: 2!important;
+    height: 7vw;
+    width: 7vw!important;
+    border-radius: 50%;
+    top: 50%!important;
+    transform: translateY(-50%);
+    margin: 0 2rem;
+}
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: rgb(0 0 0 / 53%);
+}
+
+
+/* slide 2 */
+.carousel-content-slider2 {
+    position: absolute;
+    z-index: 3;
+    color: #fff;
+    left: 50%;
+    text-align: center;
+    top: 50%;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+}

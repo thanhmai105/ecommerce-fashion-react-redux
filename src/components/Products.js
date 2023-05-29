@@ -1,28 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import StarRatings from 'react-star-ratings';
+import { useDispatch } from 'react-redux';
 
 function Products({ product, addCart }) {
-
-    // console.log(addCart);
+    const dispatch = useDispatch()
 
     const checkTitleLength = (title) => {
         if (title.length > 20) {
             return title.slice(0, 17) + '...'
-        } else {
-            return title
         }
+        return title
     }
 
     return (
         <div className="product-item" >
-            <Link to={`/menu/${product.id}`}>
+            <Link to={{
+                pathname: `/menu/${product.id}`,
+                state: product
+            }}>
                 <img src={product.image} alt={product.title} />
             </Link>
             <div className="product-content">
-                <Link to={`/menu/${product.id}`}>{checkTitleLength(product.title)}</Link><br />
+                <Link to={{ pathname: `/menu/${product.id}`, state: product }}>{checkTitleLength(product.title)}</Link><br />
                 <span>${product.price}</span>
-                <br/>
+                <br />
                 <StarRatings
                     rating={product.rating.rate}
                     starDimension="20px"
@@ -30,7 +32,7 @@ function Products({ product, addCart }) {
                     starRatedColor="#fbea54"
                 />
             </div>
-            <div className="btn-addCart" onClick={() => addCart(product)}>Add to Cart </div>
+            <div className="btn-addCart" onClick={() => dispatch(addCart(product))}>Add to Cart </div>
         </div>
     )
 }

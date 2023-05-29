@@ -1,28 +1,62 @@
 import * as ActionTypes from './ActionTypes';
+import axios from 'axios'
 
 export const fetchProducts = () => (dispatch) => {
     dispatch(productsLoading(true));
 
     return fetch('https://fakestoreapi.com/products')
         .then(response => {
-                if(response.ok){
-                    return response;
-                }
-                else {
-                    var error = new Error('Error' + response.status + ':' + response.statusText);
-                    error.response = response;
-                    throw error;
-                }
-            },
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error' + response.status + ':' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
             error => {
                 var errmess = new Error(error.message);
                 throw errmess;
             }
         )
-	    .then(response => response.json())
-	    .then(products => dispatch(addProducts(products)))
+        .then(response => response.json())
+        .then(products => dispatch(addProducts(products)))
         .catch(error => dispatch(productsFailed(error.message)));
 };
+
+//register
+const API_URL = "https://644208e133997d3ef9070789.mockapi.io/fashion/v1"
+export const signUp = (body) => async (dispatch) => {
+    const response = await axios.post(`${API_URL}/users`, body)
+        .catch(error => dispatch(registerFailed(error?.message)))
+    dispatch(registerUser(body))
+    return response
+}
+
+export const getUser = () => async (dispatch) => {
+    const response = await axios.get(`${API_URL}/users`,)
+    dispatch(signIn(response.data))
+    return response
+}
+
+//register
+export const registerUser = (user) => ({
+    type: ActionTypes.REGISTER,
+    payload: user
+})
+
+export const registerFailed = (error) => ({
+    type: ActionTypes.REGISTER_FAILED,
+    payload: error
+})
+
+//sign in
+export const signIn = (listUser) => ({
+    type: ActionTypes.GET_USER,
+    payload: listUser
+})
+
 
 //function to define action for dispatch
 

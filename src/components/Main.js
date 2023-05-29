@@ -1,6 +1,4 @@
-import React, { Component } from 'react'
-// import {baseUrl} from '../redux/baseUrl'
-// import Products from './Products';
+import React, { useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import Home from './Home'
@@ -11,9 +9,8 @@ import AboutUs from './AboutUs'
 import Contact from './Contact'
 import Login from './Login'
 
-import { fetchProducts, addCart } from '../redux/ActionCreator'
-// import { actions } from 'react-redux-form';
-import { connect } from 'react-redux';
+import { fetchProducts, addCart, signUp } from '../redux/ActionCreator';
+import { connect, useDispatch } from 'react-redux';
 import MenProduct from './MenProduct'
 import Cart from './Cart'
 
@@ -22,75 +19,44 @@ const mapStateToProps = state => {
     return {
         products: state.products,
         numberCart: state.carts.numberCart,
-        carts: state.carts
+        carts: state.carts,
+        user: state.user
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    fetchProducts: () => { dispatch(fetchProducts()) },
-    addCart:product=>dispatch(addCart(product))
-});
-
-class Main extends Component {
-
-    constructor(props) {
-        super();
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchProducts: () => dispatch(fetchProducts()),
+        addCart: product => dispatch(addCart(product)),
+        signUp: (user) => dispatch(signUp(user))
     }
+};
 
-    componentDidMount() {
-        this.props.fetchProducts();
-    }
+function Main() {
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(fetchProducts())
+    }, [])
 
-    render() {
+    return (
+        <div>
+            <Header />
+            <Switch>
+                <Route path='/home' component={props => <Home addCart={addCart} {...props} />} />
+                <Route exact path='/menu' component={props => <Menu addCart={addCart} {...props} />} />
+                <Route path='/menu/:productId' component={ProductDetail} />
+                <Route exact path='/contact' component={Contact} />
+                <Route exact path='/about' component={AboutUs} />
+                <Route exact path='/cart' component={Cart} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path="/:category" component={props => <MenProduct addCart={addCart} {...props} />} />
+                <Redirect to="/home" />
+            </Switch>
+            <Footer />
+        </div>
+    );
 
-        const ProductWithId = ({ match }) => {
-            return (
-                <ProductDetail
-                    product={this.props.products.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
-                    isLoading={this.props.products.isLoading}
-                    errMess={this.props.products.errMess}
-                    products={this.props.products.products}
-                />
-            );
-        }
-
-
-        // const CartWithId = ({ match }) => {
-        //     return (
-        //         <Cart
-        //             product={this.props.products.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
-        //             isLoading={this.props.products.isLoading}
-        //             errMess={this.props.products.errMess}
-        //         />
-        //     );
-        // }
-
-        return (
-            <div>
-                <Header
-                    products={this.props.products}
-                    numberCart={this.props.numberCart}
-                    // valueSearch={this.state.valueSearch}
-                    // handleSearch={this.handleSearch}
-                />
-                <Switch>
-                    <Route path='/home' component={() => <Home products={this.props.products} />} />
-                    <Route exact path='/login' component={(props) => <Login {...props} />} />
-                    <Route exact path='/contact' component={(props) => <Contact {...props} />} />
-                    <Route exact path='/about' component={(props) => <AboutUs {...props} />} />
-                    <Route exact path='/menu' component={() => <Menu products={this.props.products} addCart={this.props.addCart}/>} />
-                    <Route exact path='/cart' component={() => <Cart carts={this.props.carts} />} />
-
-                    <Route exact path="/men's clothing" component={() => <MenProduct products={this.props.products} />} />
-
-                    <Route path='/menu/:productId' component={ProductWithId} />
-                    <Redirect to="/home" />
-                </Switch>
-                <Footer />
-            </div>
-        );
-    }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

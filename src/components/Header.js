@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import cart from '../image/shopping-cart.png'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-function Header(props) {
+function Header() {
 
-    const categories = props.products.products.map((product) => {
-        return product.category
-    })
-    const categoriesRemain = [...new Set(categories)]
+    const { products } = useSelector(state => state.products)
+    const { numberCart } = useSelector(state => state.carts)
+
+    const listCategory = useMemo(() => {
+        const category = products.map(item => item.category)
+        return [...new Set(category)]
+    }, [products])
 
     const [search, setSearch] = useState('')
-    // console.log(search);
-    // const handleSearch = (e) => {
-    //   setSearch(e.target.value)
-    // }
+
+    const { state } = useLocation()
 
     return (
         <div className='Header border-bottom'>
@@ -25,7 +27,7 @@ function Header(props) {
                     <Link className="navbar-brand" to="/home">ekommart</Link>
                     <Link className="nav-link cart-mobile" to="/cart">
                         <img id="shopping-cart" src={cart} alt="shopping-cart" />
-                        <span id="cart-number">{props.numberCart}</span>
+                        <span id="cart-number">{numberCart}</span>
                     </Link>
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -44,9 +46,9 @@ function Header(props) {
                                 </button>
 
                                 <div className="dropdown-menu drop-menu" aria-labelledby="dropdownMenuLink">
-                                    {categoriesRemain.map((category) => (
-                                        <Link key={category} className="dropdown-item desktop" 
-                                            to={`/${category}`}>{category.charAt(0).toUpperCase() + category.slice(1)}
+                                    {listCategory.map((category) => (
+                                        <Link key={category} className="dropdown-item desktop"
+                                            to={{ pathname: `/${category}`, state: category }}>{category?.charAt(0).toUpperCase() + category?.slice(1)}
                                         </Link>
                                     ))}
                                 </div>
@@ -60,13 +62,13 @@ function Header(props) {
                         </ul>
 
                         <form className="form-inline desktop">
-                            <input 
+                            <input
                                 value={search}
                                 onChange={e => setSearch(e.target.value)}
-                                className="form-control mr-sm-2 border-0 search" 
-                                type="search" placeholder='Search...' aria-label="Search" 
+                                className="form-control mr-sm-2 border-0 search"
+                                type="search" placeholder='Search...' aria-label="Search"
                             />
-                            <button 
+                            <button
                                 className="btn p-2 border-0" type="submit">
                                 <i className="fas fa-search"></i>
                             </button>
@@ -75,9 +77,12 @@ function Header(props) {
                         <div className='nav-icon'>
                             <ul className="navbar-nav m-auto">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/login">
-                                        <i className="far fa-user"></i>
-                                    </Link>
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <Link className="nav-link" to="/login">
+                                            <i className="far fa-user"></i>
+                                        </Link>
+                                        <p style={{ margin: 0, color: "#ef3636" }}>{state ? `${state.firstName} ${state.lastName}` : ''}</p>
+                                    </div>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/like">
@@ -87,7 +92,7 @@ function Header(props) {
                                 <li className="nav-item cart-desktop">
                                     <Link className="nav-link" to="/cart">
                                         <img id="shopping-cart" src={cart} alt="shopping-cart" />
-                                        <span id="cart-number">{props.numberCart}</span>
+                                        <span id="cart-number">{numberCart}</span>
                                     </Link>
                                 </li>
                             </ul>

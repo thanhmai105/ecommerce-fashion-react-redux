@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #ef3636;
+  --primary-text: black;
+}
+
 .App {
   text-align: center;
 }
@@ -9,9 +14,13 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import './css/slider.css';
+@import './css/login.css';
 
 body {
   font-family: 'Outfit', sans-serif!important;
+  font-size: 14px;
 }
 
 /* ===========header========= */
@@ -271,8 +280,8 @@ input.search:focus-visible
 
 .product-item img {
   width: 100%;
-  height: 13rem;
-  padding-bottom: 1rem;
+  height: 70%;
+  padding: 1rem;
 }
 
 .product-item a {
@@ -375,6 +384,9 @@ div.filter div select {
 }
 
 /* ============footer============ */
+/* .footer {
+  position: fixed;
+} */
 .footer-top {
   text-align: left;
   font-size: 0.9rem;
@@ -460,15 +472,7 @@ i.fa-facebook-f {
 }
 
 /* =============slider============== */
-.slider {
-  height: 30rem;
-}
 
-.slider img {
-  width: 100%;
-  background-color: rgb(49, 49, 49);
-  height: 30rem;
-}
 
 /* ===============about us============= */
 .aboutus{}
