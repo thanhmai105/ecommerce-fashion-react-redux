@@ -1,18 +1,3 @@
-Hiển thị được giao diện bao gồm các trang
-- Home
-- Login, Register
-- Menu (bao gồm danh sách các sản phẩm, lọc sản phẩm theo category, rating, price), Men's clothing (một loại sản phẩm)
-- ProductDetail (gồm chi tiết sản phẩm và sản phẩm liên quan)
-- About Us
-- Contact Us
-- Thêm sản phẩm vào giỏ hàng, chưa có update giỏ hảng
-
-Thư viện sử dụng: 
-- BootStrap
-- ReactJS
-- Redux
-- react-router-dom
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
